@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>thenewboston</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <div id="content"></div>
+
+    <script type="text/jsx">
+
+        var MyComponent = React.createClass({
+            doSomething: function(){
+              alert("The text displaying is : " + this.props.children);
+            },
+            render: function() {
+                return (
+                        <div>
+                            <h3>{this.props.user}</h3>
+                            <a onClick={this.doSomething} href="#"> Click Me </a>
+                        </div>
+                );
+            }
+        });
+        React.render(
+          <div>
+              <MyComponent user="Ryan" >Hello world</MyComponent>
+
+
+          </div>
+          , document.getElementById('content'));
+    </script>
+
+</body>
+</html>
