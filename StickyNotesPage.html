@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <div id="content"></div>
+
+    <script type="text/jsx">
+
+        var Comment = React.createClass({
+            getInitialState: function(){
+              return { editing : false }
+            },
+            edit: function(){
+                this.setState( { editing : true } )
+                console.log("DEBUG: edit has been called")
+            },
+            remove: function(){
+                alert("Removing comment")
+            },
+            save: function(){
+                this.setState( { editing : false } )
+            },
+            renderNormal: function(){
+
+              return (
+                    <div>
+                        <div className="commentText"> {this.props.children}</div>
+                        <button onClick={this.edit} className="button-primary">Edit</button>
+                        <button onClick={this.remove} className="button-danger">Remove</button>
+                    </div>
+
+              );
+            },
+            renderForm: function(){
+
+              return (
+                    <div>
+                        <textarea defaultValue={this.props.children}></textarea>
+                        <button onClick={this.save} className="button-primary">Save</button>
+                    </div>
+
+              );
+
+              //return (
+                  //<div>
+                      //<textarea defaultValue={this.props.children}> </textarea>
+                      //<button onClick={this.edit} className="button-primary">Edit</button>
+                  //</div>
+              //);
+            },
+            render: function() {
+                      if(this.state.editing){
+                        return this.renderForm();
+                      }else{
+                        return this.renderNormal();
+                    }
+
+            }
+        });
+        React.render(
+          <div>
+              <Comment>Hello world</Comment>
+              <Comment>Goodbye world</Comment>
+              <Comment>I love miatas</Comment>
+
+
+          </div>
+          , document.getElementById('content'));
+    </script>
+
+</body>
+</html>
